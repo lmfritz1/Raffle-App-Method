@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace ConsoleUI
 {
@@ -16,6 +17,60 @@ namespace ConsoleUI
         }
 
         //Start writing your code here
+        private static Dictionary<int, string> guests = new Dictionary<int, string>();
+        private static int min = 1000;
+        private static int max = 9999;
+        private static int raffleNumber;
+        private static string message = GetUserInput();
+        private static Random _rdm = new Random();
+        private static Regex rgx = new Regex("^[a-zA-Z]");
+        private static string rgx(string input);
+        {
+           string user = input.Trim();
+           user = rgx.Replace(user, "").ToLower();
+           return user;
+        }
+        private static string GetUserInput(string message)
+        {
+            Console.WriteLine(message);
+            string user = Console.ReadLine();
+            user = rgx(user);
+            while (string.IsNullOrEmpty(user))
+            {
+                Console.WriteLine("Please enter a name: ");
+                user = rgx(user);
+            }
+
+            return user;
+        }
+        private static void GetUserInfo()
+        {
+            string name;
+            string otherGuest;
+            string prompt = "Please enter your name: ";
+            string query = "Do you want to add another name?";
+        do
+        {
+            name = GetUserInput(prompt);
+            raffleNumber = GenerateRandomNumber(min, max);
+            AddGuestsInRaffle(raffleNumber, name);
+            otherGuest = GetUserInput(query);
+        }
+        while (otherGuest == "yes");
+            
+        }
+        
+        private static int GenerateRandomNumber(int min, int max)
+        {
+            int randomNum = _rdm.Next(min, max);
+            return randomNum;
+        }
+
+        private static void AddGuestsInRaffle(int raffleNumber, string guest)
+        {
+            
+
+        }
 
 
 
